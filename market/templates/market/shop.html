@@ -1,0 +1,64 @@
+{% extends 'head.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'shop_navbar.html' %}
+
+
+       <!-- plant -->
+      <div id="plant" class="section  product">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 ">
+                  <div class="titlepage">
+                     <h2><strong class="black"> Our</strong>  Products</h2>
+                     <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected randomised words which don't look even slightly believable</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+         <div class="clothes_main section ">
+          <div class="container">
+            <div class="row">
+            {% for product in products %}
+               <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                  <div class="sport_product">
+                     <figure><img src="{{product.image.url}}" alt="img" style="height:180px; width:300px;"></figure>
+                    <h3> $<strong class="price_text">{{product.price}}</strong></h3>
+                     <h4><a href="">{{product.title}}</a></h4>
+                     <br>
+                    <button data-product={{product.id}} data-action="add" class="update-cart text-primary btn btn-outline-secondary add-btn">add to cart</button>
+                  </div>
+               </div>
+            {% endfor %}
+            
+            <div style="color: white;">page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</div> 
+               
+            <ul style="margin-left:460px;" class="pagination">
+               {% if page_obj.has_previous %}
+                 <li><a href="?page=1"><h4 style="color: white;">&laquo; first &nbsp| &nbsp </h4></a></li>
+                 <li><a href="?page={{ page_obj.previous_page_number }}"><h4 style="color: white;"> previous</h4></a></li>
+               {% endif %}
+ 
+               {% if page_obj.has_next %}
+                 <li><a href="?page={{ page_obj.next_page_number }}" style="color: white;" >next &nbsp| &nbsp</a></li>
+                 <li><a href="?page={{ page_obj.paginator.num_pages }}" style="color: white;"> last &raquo;</a></li>
+               {% endif %}
+            </ul>
+
+           </div> 
+             </div>
+            </div>
+           </div>
+           
+      </div>
+      <br/>
+      <p style="color:white;">dd</p>
+      <div style="color:white;">dd</div>
+
+   {% include 'footer.html' %}
+{% endblock content %}
+
+
+

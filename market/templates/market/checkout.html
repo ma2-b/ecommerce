@@ -1,0 +1,155 @@
+{% load static %}
+
+<html lang="en">
+	<head>
+	  <meta charset="UTF-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link rel="stylesheet" href="{% static "css/main.css" %}">
+	  <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+	  <link rel="stylesheet" href="{% static "css/style.css" %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static "images/fevicon.png" type="image/gif" %}" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static "css/jquery.mCustomScrollbar.min.css" %}">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      
+	  <title>Sock</title>
+	</head>
+	<body>
+		{% include 'shop_navbar.html' %}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="box-element" id="form-wrapper">
+                    <form id="form">
+                        <div id="user-info">
+                            <div class="form-field">
+                                <input required class="form-control" type="text" name="name" placeholder="Name..">
+                            </div>
+                            <div class="form-field">
+                                <input required class="form-control" type="email" name="email" placeholder="Email..">
+                            </div>
+                        </div>
+                        
+                        <div id="shipping-info">
+                            <hr>
+                            <p style="color:black;">Shipping Information:</p>
+                            <hr>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="address" placeholder="Address..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="city" placeholder="City..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="state" placeholder="State..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="country" placeholder="Zip code..">
+                            </div>
+                        </div>
+    
+                        <hr>
+                        <input id="form-button" class="btn bg-Primary text-white btn-block" type="submit" value="Continue">
+                    </form>
+                </div>
+    
+                <br>
+                <div class="box-element hidden" id="payment-info">
+                    <small>Paypal Options</small>
+                    <button id="make-payment">make payment</button>
+                </div>
+                
+            </div>
+    
+            <div class="col-lg-6">
+                <div class="box-element">
+                    <a  class="btn btn-outline-dark" href="{% url 'market:cart' %}">&#x2190; Back to Cart</a>
+                    <hr>
+                    <h3>Order Summary</h3>
+                    <hr>
+                    {% for item in items %}
+                    <div class="cart-row">
+                        <div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
+                        <div style="flex:2"><p style="color:#000;">{{item.product.title}}</p></div>
+                        <div style="flex:1"><p style="color:#000;">${{item.product.price|floatformat:2}}</p></div>
+                        <div style="flex:1"><p style="color:#000;">{{item.quantity}}</p></div>
+                    </div>
+                    {% endfor %}
+                    <h5>Items: {{order.cart_items}}</h5>
+                    <h5>Total: ${{order.cart_total}}</h5>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let total = '{{order.cart_total}}'
+
+            if (user != 'AnonymousUser'){
+                document.getElementById('user-info').innerHTML = ''
+            }
+
+
+            let form = document.getElementById('form')
+            form.addEventListener('submit', function (e) {
+                e.preventDefault()
+                console.log('form submitted...')
+                document.getElementById('form-button').classList.add('hidden')
+                document.getElementById('payment-info').classList.remove('hidden')
+                
+            }) 
+
+            document.getElementById('make-payment').addEventListener('click', function (e) {
+                submitFormData()
+                
+            })
+
+            function submitFormData() {
+                console.log("payment button clicked")
+
+                let userFormData = {
+                    'name': null,
+                    'email': null,
+                    'total': total,
+                }
+
+                let shippingInfo = {
+                    'address': null,
+                    'city': null,
+                    'state': null,
+                    'zipcode': null,
+                }
+
+                shippingInfo.address = form.address.value
+                shippingInfo.city = form.city.value
+                shippingInfo.state = form.state.value
+                shippingInfo.zipcode = form.zipcode.value
+
+                if (user == 'AnonymousUser') {
+                    userFormData.name = form.name.value
+                    userFormData.email = form.email.value
+                }
+
+                let url = '/process_order/'
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken' : csrftoken
+                    }
+                })
+                
+            } 
+        </script>
+        <script type="text/javascript"></script>
+	</body>
+</html>	

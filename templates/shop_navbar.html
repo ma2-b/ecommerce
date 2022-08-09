@@ -1,0 +1,37 @@
+{% load static %}
+<style>
+   .wrapper{
+   position: relative;
+   }
+   .wrapper small{
+   position: absolute;
+   top: -6px;
+   right: 24px; 
+   }
+</style>
+<nav class="navbar navbar-light bg-primary">
+    <div class="container">
+    <div class="logo">
+      <a class="navbar-brand" href="{% url 'market:home'%}">
+         <img src="{% static "images/logo.png" %}" alt="" >
+      </a>
+    </div>
+    <nav class="main-menu">
+       <div>
+          <ul class="menu-area-main mb-1 ">
+             <li class="mt-3"> <a href="{% url 'market:home'%}">Home</a> </li>
+             <li class="mt-3"> <a href="about.html">About</a></li>
+             <li class="mt-3"><a href="testmonial.html">Testmonial</a></li>
+             <li class="mt-3 "><a href="{% url 'market:shop'%}">Shop</a></li>
+             <li class="mt-3"><a href="contact.html">Contact Us</a></li>
+             <li class="last mt-3 ">
+               <a href="{% url 'market:cart' %}" class="wrapper">
+               <img src="{% static "images/cart.png" %}" style="height:22px; width:24px;" alt="icon">
+               <small>{{cartItems}}</small>
+               </a>
+            </li>
+          </ul>
+       </div>
+    </nav>
+  </div>
+</nav>
