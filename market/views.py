@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 import json
+import datetime
 
-from .models import Order, OrderItem, Product, Category
+from .models import Order, OrderItem, Product, Category, ShippingAddress
 
 # Create your views here.
 def home(request):
@@ -94,7 +95,32 @@ def updateItem(request):
     return JsonResponse("Item was added", safe=False)
 
 def process_order(request):
-    print('data:', request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+        
+        if total == float(order.cart_total):
+            order.complete = True 
+            
+        order.save()
+        
+        ShippingAddress.objects.create(
+            customer = customer,
+            order = order,
+            address = data['shipping']['address'],
+            city = data['shipping']['city'],
+            state = data['shipping']['state'],
+            zipcode = data['shipping']['zipcode']
+        )
+        
+    else:
+        print('user is not logged in')
+    
 
     return JsonResponse("payment complete", safe=False)
 
