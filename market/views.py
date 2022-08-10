@@ -93,10 +93,10 @@ def updateItem(request):
     
     return JsonResponse("Item was added", safe=False)
 
-#def process_order(request):
-#    
-#
-#    return JsonResponse("payment complete", safe=False)
+def process_order(request):
+    print('data:', request.body)
+
+    return JsonResponse("payment complete", safe=False)
 
 
 
