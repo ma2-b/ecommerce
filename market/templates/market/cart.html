@@ -48,6 +48,11 @@
               <th>
                 <h5>Total:<strong> ${{order.cart_total}}</strong></h5>
               </th>
+              {% if not user.is_authenticated %}
+              <th>
+                <h4 class="ml-2 text-danger">you have to be logged in so you can add product to the cart!</h4>
+              </th>
+              {% endif %}
               <th>
                 <a
                   style="float: right; margin: 5px"
