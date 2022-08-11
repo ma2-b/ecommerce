@@ -31,7 +31,11 @@
                         <ul class="menu-area-main">
                            <li> <a href="{% url 'market:home'%}">Home</a> </li>
                            <li> <a href="about.html">About</a> </li>
-                           <li><a href="testmonial.html">Testmonial</a></li>
+                           {% if user.is_authenticated %}
+                             <li><a href="{% url 'logout'%}">Logout</a></li>
+                           {% else %}
+                             <li><a href="{% url 'accounts:register'%}">Register</a></li>
+                           {% endif %}
                            <li><a href="{% url 'market:shop'%}">Shop</a></li>
                            <li><a href="contact.html">Contact Us</a></li>
                            <li class="last">

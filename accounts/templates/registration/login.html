@@ -1,0 +1,16 @@
+{% extends 'head.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+{% include 'shop_navbar.html' %}
+<br><br><br>
+<form method="POST">
+ 
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %} 
+        <button type="submit" class="btn btn-Primary  bg-primary btn-block">Login</button>
+    {% endbuttons %}
+
+
+{% endblock content %}
