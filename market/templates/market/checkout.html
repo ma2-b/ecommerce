@@ -24,6 +24,7 @@
 	</head>
 	<body>
 		{% include 'shop_navbar.html' %}
+        {% if user.is_authenticated %}
         <div class="row">
             <div class="col-lg-6">
                 <div class="box-element" id="form-wrapper">
@@ -90,6 +91,10 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <br><br><br>
+         <center><h1>Log in to checkout <a class="text-primary" href="{% url 'login' %}">login</a><h1></center>
+        {% endif %}
         <script type="text/javascript">
             function getToken(name) {
             let cookieValue = null;

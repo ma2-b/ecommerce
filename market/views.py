@@ -68,6 +68,8 @@ def checkout(request):
     context = {'items': items, 'order':order, 'cartItems':cartItems}
     return render(request, 'market/checkout.html', context)
     
+def about(request):
+    return render(request, 'market/about.html', {})
     
 def updateItem(request):
     data = json.loads(request.body)
