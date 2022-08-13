@@ -52,13 +52,15 @@ class Customer(models.Model):
     email = models.EmailField(max_length=254, null=True)
     
     def __str__(self):
-        return str(self.user)
+        return self.name
     
     
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_user_account(sender, instance, created, **kwargs):
     if created:
-        Customer.objects.create(user=instance) 
+        Customer.objects.create(
+            user=instance,
+            name=instance) 
         
     
     
