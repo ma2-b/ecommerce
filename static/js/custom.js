@@ -129,6 +129,7 @@ $(function () {
 		}
 	});
 
+
 	$(document).ready(function () {
 		$("#contact-form").validate({
 			rules: {
@@ -319,12 +320,15 @@ $(function () {
 		});
 	});
 
+	
 	/* Product slider 
 	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 	// optional
+
 	$('#blogCarousel').carousel({
 		interval: 1000
 	});
+
 
 
 });
