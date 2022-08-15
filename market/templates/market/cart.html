@@ -50,7 +50,7 @@
               </th>
               {% if not user.is_authenticated %}
               <th>
-                <h4 class="ml-2 text-danger">you have to be logged in so you can add product to the cart! <a class="text-primary" href="{% url 'login'%}">Login</a></h4>
+                <h4 class="ml-2 text-danger">you have to be logged in so you can add product to the cart! <a class="text-primary" href="{% url 'accounts:login'%}">Login</a></h4>
               </th>
               {% endif %}
               {% if user.is_authenticated %}

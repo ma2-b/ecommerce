@@ -22,7 +22,7 @@
              <li class="mt-4"> <a href="{% url 'market:home'%}">Home</a> </li>
              <li class="mt-4"> <a href="{% url 'market:about' %}">About</a></li>
              {% if user.is_authenticated %}
-             <li class="mt-4"><a href="{% url 'logout'%}">Logout</a></li>
+             <li class="mt-4"><a href="{% url 'accounts:logout'%}">Logout</a></li>
              {% else %}
              <li class="mt-4"><a href="{% url 'accounts:register'%}">Register</a></li>
              {% endif %}
