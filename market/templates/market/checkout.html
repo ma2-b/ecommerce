@@ -37,30 +37,32 @@
                                 <input required class="form-control" type="email" name="email" placeholder="Email..">
                             </div>
                         </div>
-                        
-                        <div id="shipping-info">
-                            <hr>
-                            <p style="color:black;">Shipping Information:</p>
-                            <hr>
-                            <div class="form-field">
-                                <input class="form-control" type="text" required="required" name="address" placeholder="Address..">
-                            </div>
-                            <div class="form-field">
-                                <input class="form-control" type="text" required="required" name="city" placeholder="City..">
-                            </div>
-                            <div class="form-field">
-                                <input class="form-control" type="text"  required="required" name="state" placeholder="State..">
-                            </div>
-                            <div class="form-field">
-                                <input class="form-control" type="text" required="required" name="zipcode" placeholder="Zip code..">
-                            </div>
-                            <div class="form-field">
-                                <input class="form-control" type="text" required="required" name="country" placeholder="Zip code..">
-                            </div>
-                        </div>
-    
-                        <hr>
-                        <input id="form-button" class="btn bg-Primary text-white btn-block" type="submit" value="Continue">
+                        {% if order.cart_items == 0 %}
+                          <h3>you must have product in your cart so you can checkout</h3>
+                        {% else %}
+                          <div id="shipping-info">
+                              <hr>
+                              <p style="color:black;">Shipping Information:</p>
+                              <hr>
+                              <div class="form-field">
+                                  <input class="form-control" type="text" required="required" name="address" placeholder="Address..">
+                              </div>
+                              <div class="form-field">
+                                  <input class="form-control" type="text" required="required" name="city" placeholder="City..">
+                              </div>
+                              <div class="form-field">
+                                  <input class="form-control" type="text"  required="required" name="state" placeholder="State..">
+                              </div>
+                              <div class="form-field">
+                                  <input class="form-control" type="text" required="required" name="zipcode" placeholder="Zip code..">
+                              </div>
+                              <div class="form-field">
+                                 <input class="form-control" type="text" required="required" name="country" placeholder="Zip code..">
+                              </div>
+                          </div>
+                          <hr>
+                          <input id="form-button" class="btn bg-Primary text-white btn-block" type="submit" value="Continue">
+                        {% endif %}
                     </form>
                 </div>
     
