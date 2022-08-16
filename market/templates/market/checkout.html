@@ -66,8 +66,9 @@
     
                 <br>
                 <div class="box-element hidden" id="payment-info">
-                    <small>Paypal Options</small>
-                    <button id="make-payment" class="payment">make payment</button>
+                    <small>paypal options:</small>
+                    <div id="paypal-button-container"></div>
+                    <!--<button id="make-payment" class="payment">make payment</button>-->
                 </div>
                 
             </div>
@@ -132,11 +133,12 @@
                 document.getElementById('payment-info').classList.remove('hidden')
 
             }) 
-
+            
+            /*
             document.getElementById('make-payment').addEventListener('click', function (e) {
                 submitFormData()
                 
-            })
+            })*/
 
             function submitFormData() {
                 console.log("payment button clicked")
@@ -186,6 +188,45 @@
 
         </script>
 
+        <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+
+        <script>
+
+            let totalPrice = '{{order.cart_total}}'
+            
+            // Render the PayPal button into #paypal-button-container
+            paypal.Buttons({
+                style: {
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'pay',
+                    height: 40
+                },
+        
+                // Set up the transaction
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalPrice
+                            }
+                        }]
+                    });
+                },
+    
+                // Finalize the transaction
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(orderData) {
+                        // Successful capture! For demo purposes:
+                        submitFormData()
+    
+
+                    });
+                }
+    
+    
+            }).render('#paypal-button-container');
+        </script>
 
         
 	</body>
