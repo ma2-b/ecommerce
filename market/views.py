@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 import json
 import datetime
@@ -70,8 +70,12 @@ def checkout(request):
     return render(request, 'market/checkout.html', context)
  
     
-def about(request):
-    return render(request, 'market/about.html', {})
+class AboutView(TemplateView):
+    template_name = 'market/about.html'   
+   
+    
+class ContanctView(TemplateView):
+    template_name = 'market/contact.html'
 
     
 def updateItem(request):

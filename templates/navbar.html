@@ -37,7 +37,7 @@
                              <li><a href="{% url 'accounts:register'%}">Register</a></li>
                            {% endif %}
                            <li><a href="{% url 'market:shop'%}">Shop</a></li>
-                           <li><a href="contact.html">Contact Us</a></li>
+                           <li><a href="{% url 'market:contanct'%}">Contact Us</a></li>
                            <li class="last">
                               <a href="{% url 'market:cart' %}"  class="wrapper">
                               <img src="{% static "images/cart.png" %}" style="height:20px; width:24px;" alt="icon">
