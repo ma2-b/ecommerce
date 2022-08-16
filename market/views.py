@@ -54,6 +54,7 @@ def cart(request):
     context = {'items': items, 'order':order, 'cartItems':cartItems}
     return render(request, 'market/cart.html', context)
    
+   
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer 
@@ -67,9 +68,11 @@ def checkout(request):
         
     context = {'items': items, 'order':order, 'cartItems':cartItems}
     return render(request, 'market/checkout.html', context)
+ 
     
 def about(request):
     return render(request, 'market/about.html', {})
+
     
 def updateItem(request):
     data = json.loads(request.body)
@@ -95,6 +98,7 @@ def updateItem(request):
         orderItem.delete()
     
     return JsonResponse("Item was added", safe=False)
+
 
 def process_order(request):
     transaction_id = datetime.datetime.now().timestamp()

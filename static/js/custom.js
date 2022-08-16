@@ -319,7 +319,7 @@ $(function () {
 			$(this).toggleClass('active');
 		});
 	});
-
+	
 	
 	/* Product slider 
 	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
