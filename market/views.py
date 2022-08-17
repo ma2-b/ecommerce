@@ -38,7 +38,7 @@ class ShopListView(ListView):
     context_object_name = "products"
     paginate_by = 6
     
-    
+        
 def cart(request):
     
     if request.user.is_authenticated:
