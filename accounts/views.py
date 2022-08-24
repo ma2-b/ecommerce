@@ -1,4 +1,3 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 
 from django.views import generic
@@ -23,4 +22,5 @@ class UserRegisterView(generic.CreateView):
     template_name = 'registration/register.html'
     
     def get_success_url(self):
-        return reverse('login')
+        return reverse('login') 
+    
